@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, ForeignKey, Integer, String, Date, Numeric
+﻿from sqlalchemy import Table, Column, ForeignKey, Integer, String, Date, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
@@ -17,7 +17,15 @@ class Shelter(Base):
     state = Column(String(20))
     zipCode = Column(String(10))
     website = Column(String)
+    maximum_capacity = Column(Integer)
+    current_occupancy = Column(Integer)
     
+    def can_add_putty(self):
+        print "The shelter is full, try a different shelter"
+        return current_occupancy<maximum_capacity  
+   
+
+        
 class Puppy(Base):
     __tablename__ = 'puppy'
     id = Column(Integer, primary_key=True)
@@ -30,6 +38,7 @@ class Puppy(Base):
     weight = Column(Numeric(10))
     profile = relationship("PuppyProfile", uselist=False, backref="puppy")
     adopters = relationship("Adopters", secondary=association_table, backref="puppies")
+
 
 class PuppyProfile(Base):
     __tablename__='puppy_profile'
