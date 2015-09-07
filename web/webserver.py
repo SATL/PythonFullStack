@@ -1,8 +1,9 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import hello_api
+from api.restaurantApi import RestaurantApi
 
 basicApi = hello_api.helloApi()
-
+restaurantApi = RestaurantApi()
 class webServerHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
@@ -10,6 +11,10 @@ class webServerHandler(BaseHTTPRequestHandler):
                 basicApi.helloGet(self);
             if( self.path.endswith("/hola") ):
                 basicApi.helloGet(self);
+            if( self.path.endswith("/restaurant") ):
+                restaurantApi.getAll(self)
+
+
         except IOError:
             server.send_error(404, 'File Not Found: %s' % server.path)
 
