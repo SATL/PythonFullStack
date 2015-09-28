@@ -11,8 +11,10 @@ class webServerHandler(BaseHTTPRequestHandler):
                 basicApi.helloGet(self);
             if( self.path.endswith("/hola") ):
                 basicApi.helloGet(self);
-            if( self.path.endswith("/restaurant") ):
+            if( self.path.endswith("/restaurants") ):
                 restaurantApi.getAll(self)
+            if( self.path.endswith("/restaurants/new")):
+                restaurantApi.create_GET(self)
 
 
         except IOError:
@@ -22,6 +24,8 @@ class webServerHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         if( self.path.endswith("/hello") ):
             basicApi.helloPost(self)
+        if( self.path.endswith("/restaurants/new")):
+            restaurantApi.create_POST(self)
 
 
 def main():

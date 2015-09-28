@@ -1,8 +1,9 @@
 import cgi
 from dao.restaurantDAO import RestaurantDAO
-from genericDAOApi import GenericDAOApi
+from GenericApi import GenericApi
 
-class RestaurantApi(GenericDAOApi):
+class RestaurantApi(GenericApi):
+	postForm = '''<form method='POST' enctype='multipart/form-data' action='/restaurants/new'><h2>What is the name of the restaurant?</h2><input name="name" type="text" ><input type="submit" value="Submit"> </form>'''
 	def __init__(self):
 		restaurantDAO = RestaurantDAO() 
-		GenericDAOApi.__init__(self, restaurantDAO)	
+		GenericApi.__init__(self, restaurantDAO, self.postForm)	

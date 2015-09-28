@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 from mapper_setup import Restaurant, Base, MenuItem
 
-class GenericDAO:
+class GenericDAO(object):
 	__database__ = 'sqlite:///restaurantmenu.db'
 	def __init__(self, orm_object):		
 		engine = create_engine(self.__database__)
