@@ -14,12 +14,13 @@ class GenericApi:
 		all = self.dao.findAll()
 		for obj in all:
 			output+=obj.name+'<br>'
-			output+="<a href='restaurant/"+str(obj.id)+"'>Edit</a>    "
+			output+="<a href='restaurant/"+str(obj.id)+"/edit'>Edit</a>    "
 			output+="<a href='restaurant/"+str(obj.id)+"'>Remove</a>"
 			output +='</p><hr>'
 		output += "</body></html>"
 		server.wfile.write(output)
 		return
+vagrant up
 
 	def getOne(self, server, id):
 		server.send_response(200)
@@ -60,3 +61,14 @@ class GenericApi:
 		output += self.postForm
 		output += "</body></html>"
 		server.wfile.write(output)
+
+	def edit_GET(self, server):
+		id = server.path.split('/')[2]
+		obj = self.dao.get(id)
+		if obj!=[]:
+			server.send_response(200)
+			server.send_header('Content-type', 'text/html')
+			server.end_headers()
+			output='<html><body>'
+			output='<h1>'+obj.name+'</h1>'
+			output+='</body></html>'

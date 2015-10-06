@@ -15,6 +15,8 @@ class webServerHandler(BaseHTTPRequestHandler):
                 restaurantApi.getAll(self)
             if( self.path.endswith("/restaurants/new")):
                 restaurantApi.create_GET(self)
+            if( self.path.endswith("/edit")):
+                restaurantApi.edit_GET(self)
 
 
         except IOError:
